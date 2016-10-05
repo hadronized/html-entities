@@ -2,6 +2,7 @@ use std::collections::BTreeMap;
 
 pub fn entities() -> BTreeMap<&'static str, &'static str> {
   let mut entities = BTreeMap::new();
+  entities.insert("&#187;", "»");
   entities.insert("&AElig", "Æ");
   entities.insert("&AElig;", "Æ");
   entities.insert("&AMP", "&");
