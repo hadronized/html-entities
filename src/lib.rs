@@ -86,24 +86,34 @@ fn parse_entity_numeric(chars: &mut Peekable<Chars>, line: usize, col: &mut usiz
 }
 
 fn parse_entity_hex(chars: &mut Peekable<Chars>, line: usize, col: &mut usize) -> Result<char, DecodeError> {
-  let num = try!(parse_number(chars));
+  let num = try!(parse_number(chars, line, col));
   let dec = try!(u32::from_str_radix(&num, 16).map_err(|_| DecodeError::IllFormedEntity(line, *col)));
 
   from_u32(dec).ok_or(DecodeError::IllFormedEntity(line, *col))
 }
 
 fn parse_entity_dec(chars: &mut Peekable<Chars>, line: usize, col: &mut usize) -> Result<char, DecodeError> {
-  let num = try!(try!(parse_number(chars)).parse().map_err(|_| DecodeError::IllFormedEntity(line, *col)));
+  let num = try!(try!(parse_number(chars, line, col)).parse().map_err(|_| DecodeError::IllFormedEntity(line, *col)));
   from_u32(num).ok_or(DecodeError::IllFormedEntity(line, *col))
 }
 
-fn parse_number(chars: &mut Peekable<Chars>) -> Result<String, DecodeError> {
+fn parse_number(chars: &mut Peekable<Chars>, line: usize, col: &mut usize) -> Result<String, DecodeError> {
   let mut hex = String::new();
+  let mut l = 0;
 
   loop {
     if let Some(c) = chars.next() {
+      *col += 1;
+
       if c == ';' {
         break;
+      }
+
+      l += 1;
+
+      // abort on long numbers people would try to make to break our code
+      if l >= 16 {
+        return Err(DecodeError::IllFormedEntity(line, *col));
       }
 
       hex.push(c);
