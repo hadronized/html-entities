@@ -4,7 +4,7 @@ version = "0.1.0"
 license = "BSD-3-Clause"
 authors = ["Dimitri Sabadie <dimitri.sabadie@sculpteo.com>"]
 description = "A HTML entities utility crate"
-keywords = ["html", "entities", "encode", "decode", "parsing", "parser"]
+keywords = ["html", "entities", "encode", "decode", "parsing"]
 
 homepage = "https://github.com/phaazon/html-entities"
 repository = "https://github.com/phaazon/html-entities"
