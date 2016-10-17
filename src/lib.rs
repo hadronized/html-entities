@@ -27,6 +27,7 @@ lazy_static! {
   static ref ENTITIES: Entities = Entities::new();
 }
 
+#[derive(Clone, Debug)]
 pub enum DecodeError {
   IllFormedEntity(Line, Col),
   UnknownEntity(Line, Col, String),
