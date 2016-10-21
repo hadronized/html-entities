@@ -1,8 +1,8 @@
 [package]
 name = "html-entities"
-version = "0.1.0"
+version = "0.1.0-1"
 license = "BSD-3-Clause"
-authors = ["Dimitri Sabadie <dimitri.sabadie@sculpteo.com>"]
+authors = ["Dimitri Sabadie <dimitri.sabadie@gmail.com>"]
 description = "A HTML entities utility crate"
 keywords = ["html", "entities", "encode", "decode", "parsing"]
 
